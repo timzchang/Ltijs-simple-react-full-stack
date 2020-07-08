@@ -1,23 +1,31 @@
-import React, { Component } from 'react';
-import './app.css';
-import ReactImage from './react.png';
+import React from 'react'
+import Home from './pages/home'
+import Grades from './pages/grades'
+import NamesAndRoles from './pages/namesandroles'
+import DeepLink from './pages/deeplink'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
 
-export default class App extends Component {
-  state = { username: null };
-
-  componentDidMount() {
-    fetch('/api/getUsername')
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
-  }
-
-  render() {
-    const { username } = this.state;
-    return (
-      <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
-      </div>
-    );
-  }
+export default function App () {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route path='/grades'>
+          <Grades />
+        </Route>
+        <Route path='/namesandroles'>
+          <NamesAndRoles />
+        </Route>
+        <Route path='/deeplink'>
+          <DeepLink />
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
